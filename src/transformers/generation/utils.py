@@ -481,8 +481,9 @@ class GenerationMixin:
         # Otherwise we have may have information -> try to infer the attention mask
         if inputs.device.type == "mps":
             # mps does not support torch.isin (https://github.com/pytorch/pytorch/issues/77764)
-            raise ValueError(
-                "Can't infer missing attention mask on `mps` device. Please provide an `attention_mask` or use a different device."
+            warnings.warn(
+                "Can't infer missing attention mask on `mps` device. Please provide an `attention_mask` or use a different device.",
+                FutureWarning,
             )
 
         is_pad_token_in_inputs = (pad_token_id is not None) and (
