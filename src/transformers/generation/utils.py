@@ -481,6 +481,7 @@ class GenerationMixin:
         # Otherwise we have may have information -> try to infer the attention mask
         if inputs.device.type == "mps":
             # mps does not support torch.isin (https://github.com/pytorch/pytorch/issues/77764)
+            # patched by Adam Kessel 2024-10-08 to enable coqui-tts to run on mac, not sure if that will break anything
             warnings.warn(
                 "Can't infer missing attention mask on `mps` device. Please provide an `attention_mask` or use a different device.",
                 FutureWarning,
